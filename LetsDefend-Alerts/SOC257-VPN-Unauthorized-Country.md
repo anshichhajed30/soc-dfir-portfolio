@@ -51,7 +51,7 @@ Target account: monica@letsdefend.io
 2. Reset Monica's password as a precaution (credentials may be compromised)
 3. Block source IP: 113.161.158.12
 4. Monitor Monica's account for further anomalous activity
-5. Review if other accounts received similar attempts (lateral spray check)
+5. Review if other accounts received similar attempts (lateral spray check) 
 
 ## MITRE ATT&CK Techniques
 
