@@ -6,8 +6,6 @@
 **Status:** ✅ Completed  
 **Date:** April 2026  
 
----
-
 ## Scenario
 
 As a Tier-2 SOC analyst, I received an escalation regarding a 
@@ -18,14 +16,10 @@ network and a PCAP was obtained from the NSM utility for analysis.
 **Objective:** Analyze the PCAP, identify malicious activity, trace 
 the attack vector, and extract all IOCs.
 
----
-
 ## Tools Used
 
 - **Wireshark** — PCAP analysis, conversation statistics, TCP stream 
   reconstruction
-
----
 
 ## Vulnerability
 
@@ -40,8 +34,6 @@ class and execute arbitrary commands — without any authentication.
 Actively exploited in the wild by ransomware groups including 
 HelloKitty and TellYouThePass following public disclosure in 
 October 2023.
-
----
 
 ## Investigation Process
 
@@ -60,8 +52,6 @@ communication.
 
 **Primary C2 IP: `146.190.21.92`**
 
----
-
 ### 2. Identifying the Exploited Port and Service
 
 Examined packet 5 in the PCAP. The destination port used by the 
@@ -72,7 +62,6 @@ the challenge name and traffic pattern.
 **Port:** `61616`  
 **Vulnerable Service:** `Apache ActiveMQ`
 
----
 
 ### 3. Finding the Second C2 Server
 
@@ -93,8 +82,6 @@ response — confirming this server was serving a Linux executable
 
 **Second C2 IP: `128.199.52.72`**
 
----
-
 ### 4. Identifying the Dropped Reverse Shell
 
 Navigated to packet 11 and followed the TCP stream. The stream 
@@ -104,16 +91,12 @@ revealed the attacker dropping a reverse shell executable into the
 **Reverse Shell Filename:** `docker`  
 **Drop Location:** `/tmp/docker`
 
----
-
 ### 5. Java Class Used in the Exploit
 
 From the same TCP stream (packet 11), the XML exploit payload 
 invoked the following Java class to achieve code execution:
 
 **Java Class:** `java.lang.ProcessBuilder`
-
----
 
 ### 6. Root Cause — Vulnerable Method
 
@@ -126,8 +109,6 @@ This method improperly deserializes a ClassInfo command from the
 OpenWire protocol, allowing a remote attacker to supply a URL 
 pointing to a malicious Java class which gets loaded and executed 
 on the broker.
-
----
 
 ## IOC Summary
 
@@ -143,8 +124,6 @@ on the broker.
 | Java Class (exploit) | `java.lang.ProcessBuilder` |
 | Vulnerable Method | `BaseDataStreamMarshaller.createThrowable` |
 
----
-
 ## Wireshark Techniques Used
 
 ```
@@ -153,8 +132,6 @@ ip.addr == 128.199.52.72            # Filter specific IP traffic
 Follow TCP Stream                   # Reconstruct attacker sessions
                                     # and identify ELF magic bytes
 ```
-
----
 
 ## What I Learned
 
@@ -167,8 +144,6 @@ Follow TCP Stream                   # Reconstruct attacker sessions
 - The role of `BaseDataStreamMarshaller.createThrowable` in the 
   exploit chain — not just the CVE number but the actual code path
 
----
-
 ## Remediation / Blue Team Takeaways
 
 - Patch Apache ActiveMQ to version 5.15.16, 5.16.7, 5.17.6, 
@@ -179,6 +154,3 @@ Follow TCP Stream                   # Reconstruct attacker sessions
 - Restrict ActiveMQ to internal network segments only — never 
   internet-facing
 - Implement egress filtering to detect reverse shell callbacks
-
----
-
