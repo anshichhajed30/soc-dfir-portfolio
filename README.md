@@ -18,6 +18,12 @@ practice — alerts, lab writeups, notes, and cheatsheets.
 |-------------------------------------------------------------------------------------------|---------------------|---------------|
 | [SOC257 - VPN Unauthorized Country](LetsDefend-Alerts/SOC257-VPN-Unauthorized-Country.md) | Unauthorized Access | True Positive |
 
+## CyberDefenders Labs
+
+| Lab | Category | Difficulty | Status |
+|---|---|---|---|
+| [OpenWire](CyberDefenders-Labs/OpenWire-WriteUp.md) | Network Forensics | Medium | ✅ Completed |
+
 ## Tools I Work With
 Autopsy · FTK Imager · Volatility · Wireshark · Splunk · 
 Burp Suite · ADB · EnCase · Kali Linux
