@@ -5,7 +5,7 @@
 **Difficulty:** Medium  
 **Status:** ✅ Completed  
 **Date:** April 2026  
-
+ 
 ## Scenario
 
 As a Tier-2 SOC analyst, I received an escalation regarding a 
