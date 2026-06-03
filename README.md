@@ -23,6 +23,7 @@ practice — alerts, lab writeups, notes, and cheatsheets.
 | Lab | Category | Difficulty | Status |
 |---|---|---|---|
 | [OpenWire](CyberDefenders-Labs/OpenWire-WriteUp.md) | Network Forensics | Medium | ✅ Completed |
+| [PsExec Hunt](CyberDefenders-Labs/PsExec-Hunt-WriteUp.md) | Network / Endpoint Forensics | Easy | ✅ Completed |
 
 ## Tools I Work With
 Autopsy · FTK Imager · Volatility · Wireshark · Splunk · 
@@ -31,3 +32,5 @@ Burp Suite · ADB · EnCase · Kali Linux
 ## Certifications (In Progress)
 - [ ] CompTIA Security+
 - [ ] BTL1
+
+
